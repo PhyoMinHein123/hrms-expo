@@ -1,20 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Alert } from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import EmployeeList from './src/employees/EmployeeList';
+import { createStackNavigator } from 'react-navigation-stack';
+import EmployeeDetail from './src/employees/EmployeeDetail';
+import { createAppContainer } from 'react-navigation';
+import Login from './src/Login';
+import EmployeeForm from './src/employees/EmployeeForm';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+
+const AppNavitagor = createStackNavigator(
+  {
+    List : {screen: EmployeeList},
+    Detail : {screen: EmployeeDetail},
+    Form : {screen: EmployeeForm},
+    Login : {screen: Login}
   },
-});
+  {
+    initialRouteName: "Login"
+  }
+)
+
+const App = createAppContainer(AppNavitagor)
+
+
+
+export default App
